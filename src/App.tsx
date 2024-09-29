@@ -46,10 +46,10 @@ export const App = () => {
                     {/* exact - render page only if "/" in url */}
                     <div className="flex-grow-1">
 
-                        <Route path="https://library-website-production.up.railway.app//login" render={() => <LoginWidget/>}/>
+                        <Route path="https://library-website-production.up.railway.app/login" render={() => <LoginWidget/>}/>
 
                         <Route path="https://library-website-production.up.railway.app/" exact>
-                            <Redirect to="/home"/>
+                            <Redirect to="https://library-website-production.up.railway.app/home"/>
                         </Route>
 
                         <Route path="https://library-website-production.up.railway.app/home" exact>
