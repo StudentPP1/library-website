@@ -46,57 +46,57 @@ export const App = () => {
                     {/* exact - render page only if "/" in url */}
                     <div className="flex-grow-1">
 
-                        <Route path="/login" render={() => <LoginWidget/>}/>
+                        <Route path="https://library-website-production.up.railway.app//login" render={() => <LoginWidget/>}/>
 
-                        <Route path="/" exact>
+                        <Route path="https://library-website-production.up.railway.app/" exact>
                             <Redirect to="/home"/>
                         </Route>
 
-                        <Route path="/home" exact>
+                        <Route path="https://library-website-production.up.railway.app/home" exact>
                             <HomePage/>
                         </Route>
 
-                        <Route path="/search">
+                        <Route path="https://library-website-production.up.railway.app/search">
                             <SearchBooksPage/>
                         </Route>
 
-                        <Route path="/checkout/:bookId" exact>
+                        <Route path="https://library-website-production.up.railway.app/checkout/:bookId" exact>
                             <BookCheckoutPage/>
                         </Route>
 
-                        <Route path="/reviewlist/:bookId" exact>
+                        <Route path="https://library-website-production.up.railway.app/reviewlist/:bookId" exact>
                             <ReviewListPage/>
                         </Route>
 
-                        <Route path="/cart">
+                        <Route path="https://library-website-production.up.railway.app/cart">
                             {isAuth
                                 ?  <CartPage/>
                                 : <LoginWidget/>
                             }
                         </Route>
 
-                        <Route path="/shelf">
+                        <Route path="https://library-website-production.up.railway.app/shelf">
                             {isAuth
                                 ?  <ShelfPage/>
                                 : <LoginWidget/>
                             }
                         </Route>
 
-                        <Route path="/messages">
+                        <Route path="https://library-website-production.up.railway.app/messages">
                             {isAuth
                                 ?  <MessagesPage/>
                                 : <LoginWidget/>
                             }
                         </Route>
 
-                        <Route path="/admin">
+                        <Route path="https://library-website-production.up.railway.app/admin">
                             {isAuth && role == "ADMIN"
                                 ?  <ManageLibraryPage/>
                                 : <HomePage/>
                             }
                         </Route>
 
-                        <Route path="/buy/:bookId">
+                        <Route path="https://library-website-production.up.railway.app/buy/:bookId">
                             {isAuth
                                 ?  <PaymentPage/>
                                 : <LoginWidget/>
