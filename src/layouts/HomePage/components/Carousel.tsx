@@ -17,6 +17,8 @@ export const Carousel = () => {
             const response = await fetch(url, {
                 headers: {
                     mode: "no-cors",
+                    "Access-Control-Allow-Origin": "*",
+                    "Content-Type": "application/json",
                 }
             });
 
