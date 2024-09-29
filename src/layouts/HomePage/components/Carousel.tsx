@@ -16,7 +16,7 @@ export const Carousel = () => {
             const url: string = `${baseUrl}?page=0&size=9`;
             const response = await fetch(url, {
                 headers: {
-                    cors: "no-cors",
+                    mode: "no-cors",
                 }
             });
 
