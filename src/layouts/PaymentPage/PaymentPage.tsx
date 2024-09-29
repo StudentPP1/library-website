@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react"
-import { Auth } from "../../context/context"
+import { Auth, AuthContextType } from "../../context/context"
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Link } from "react-router-dom";
 import PaymentInfoRequest from "../../models/PaymentInfoRequest";
+import {REACT_APP_API} from './../../constants/index.ts'
 
 export const PaymentPage = () => {
-    const { isAuth } = useContext(Auth);
+    const authContext = useContext<AuthContextType | null>(Auth);
     const [httpError, setHttpError] = useState(false)
     const [submitDisabled, setSubmitDisabled] = useState(false);
     const [fees, setFees] = useState(0)
@@ -17,8 +18,8 @@ export const PaymentPage = () => {
 
     useEffect(() => {
         const fetchFees = async () => {
-            if (isAuth) {
-                const url = `${process.env.REACT_APP_API}/secure/payment/search/price?bookId=${bookId}`
+            if (authContext?.isAuth) {
+                const url = `${REACT_APP_API}/secure/payment/search/price?bookId=${bookId}`
                 const requestOptions = {
                     method: "GET",
                     headers: {
@@ -42,7 +43,7 @@ export const PaymentPage = () => {
             setIsLoadingFees(false)
             setHttpError(error.message)
         })
-    }, [isAuth])
+    }, [authContext?.isAuth])
 
     const elements = useElements();
     const stripe = useStripe();
@@ -54,7 +55,7 @@ export const PaymentPage = () => {
         setSubmitDisabled(true);
 
         let paymentInfo = new PaymentInfoRequest(Math.round(fees * 100), "USD", email);
-        const paymentUrl = `${process.env.REACT_APP_API}/secure/payment/payment-intent`;
+        const paymentUrl = `${REACT_APP_API}/secure/payment/payment-intent`;
         const requestOptions = {
             method: "POST",
             headers: {
@@ -91,7 +92,7 @@ export const PaymentPage = () => {
                 alert("There was an error")
             } else {
                 console.log(1)
-                const url2 = `${process.env.REACT_APP_API}/secure/payment/payment-complete`;
+                const url2 = `${REACT_APP_API}/secure/payment/payment-complete`;
                 const requestOptions2 = {
                     method: "PUT",
                     headers: {
@@ -111,7 +112,7 @@ export const PaymentPage = () => {
                 setSubmitDisabled(false)
             }
         }).then(async function () {
-            const url = `${process.env.REACT_APP_API}/secure/buy/book?bookId=${bookId}`
+            const url = `${REACT_APP_API}/secure/buy/book?bookId=${bookId}`
             const requestOptions = {
                 method: "PUT",
                 headers: {

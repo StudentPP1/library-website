@@ -7,9 +7,10 @@ import ReviewModel from "../../models/ReviewModel.ts";
 import { LatestReviews } from "./LatestReviews.tsx";
 import { Auth } from "../../context/context.ts";
 import ReviewRequestModel from "../../models/ReviewRequestModel.ts";
+import {REACT_APP_API} from '../../constants/index.ts'
 
 export const BookCheckoutPage = () => {
-    const { isAuth } = useContext(Auth);
+    const authContext = useContext(Auth);
 
     const [book, setBook] = useState<BookModel>();
     const [isLoading, setIsLoading] = useState(true);
@@ -31,7 +32,7 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchBook = async () => {
-            const url: string = `${process.env.REACT_APP_API}/api/books/${bookId}`;
+            const url: string = `${REACT_APP_API}/api/books/${bookId}`;
             const response = await fetch(url);
 
             if (!response.ok) {
@@ -61,7 +62,7 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchBookReviews = async () => {
-            const reviewUrl: string = `${process.env.REACT_APP_API}/api/reviews/search/findByBookId?bookId=${bookId}`;
+            const reviewUrl: string = `${REACT_APP_API}/api/reviews/search/findByBookId?bookId=${bookId}`;
             const response = await fetch(reviewUrl);
             if (!response.ok) {
                 throw new Error(response.statusText);
@@ -102,8 +103,8 @@ export const BookCheckoutPage = () => {
 
     useEffect(() => {
         const fetchCheckedOutBook = async () => {
-            if (isAuth) {
-                const url = `${process.env.REACT_APP_API}/secure/book/checked?bookId=${bookId}`;
+            if (authContext?.isAuth) {
+                const url = `${REACT_APP_API}/secure/book/checked?bookId=${bookId}`;
                 const requestOption = {
                     method: "GET",
                     headers: {
@@ -127,12 +128,12 @@ export const BookCheckoutPage = () => {
             setIsLoadingChecked(false);
             setHttpError(error.message)
         })
-    }, [isAuth]);
+    }, [authContext?.isAuth]);
 
     useEffect(() => {
         const fetchUserReview = async () => {
-            if (isAuth) {
-                const url = `${process.env.REACT_APP_API}/secure/reviews/user/book?bookId=${bookId}`;
+            if (authContext?.isAuth) {
+                const url = `${REACT_APP_API}/secure/reviews/user/book?bookId=${bookId}`;
                 const requestOption = {
                     method: "GET",
                     headers: {
@@ -156,7 +157,7 @@ export const BookCheckoutPage = () => {
             setIsLoadingUserReview(false)
             setHttpError(error.message)
         })
-    }, [isAuth]);
+    }, [authContext?.isAuth]);
 
     if (isLoading ||
         isLoadingReview ||
@@ -176,7 +177,7 @@ export const BookCheckoutPage = () => {
     }
 
     async function checkoutBook() {
-        const url = `${process.env.REACT_APP_API}/secure/checkout?bookId=${bookId}`;
+        const url = `${REACT_APP_API}/secure/checkout?bookId=${bookId}`;
         const requestOption = {
             method: "PUT",
             headers: {
@@ -194,14 +195,14 @@ export const BookCheckoutPage = () => {
     async function submitReview(
         starInput: number,
         reviewDescription: string) {
-        let bookId: number = 0;
+        let bookId: string = "";
         if (book?.id) {
             bookId = book.id;
         }
         const reviewRequestModel = new ReviewRequestModel(
             starInput, bookId, reviewDescription
         );
-        const url = `${process.env.REACT_APP_API}/secure/reviews/postReview`;
+        const url = `${REACT_APP_API}/secure/reviews/postReview`;
         const requestOption = {
             method: "POST",
             headers: {

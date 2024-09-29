@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { SpinnerLoading } from "../Utils/SpinnerLoading";
 import { Link } from "react-router-dom";
 import CartBook from "../../models/CartBook";
+import {REACT_APP_API} from './../../constants/index.ts'
 
 export const ShelfPage = () => {
     const [httpError, setHttpError] = useState(null)
@@ -12,7 +13,7 @@ export const ShelfPage = () => {
 
     useEffect(() => {
         const fetchLoans = async () => {
-            const url = `${process.env.REACT_APP_API}/secure/cart`;
+            const url = `${REACT_APP_API}/secure/cart`;
             const requestOptions = {
                 method: "GET",
                 headers: {
@@ -28,7 +29,7 @@ export const ShelfPage = () => {
 
             const json = await response.json();
             console.log(json)
-            setCartBooks(json.filter((r) => r.book.buy === true))
+            setCartBooks(json.filter((r:any) => r.book.buy === true))
             setIsLoading(false)
         }
         fetchLoans().catch((error: any) => {
@@ -52,8 +53,8 @@ export const ShelfPage = () => {
         )
     }
 
-    async function returnBook(bookId: number) {
-        const url = `${process.env.REACT_APP_API}/secure/return?bookId=${bookId}`;
+    async function returnBook(bookId: string) {
+        const url = `${REACT_APP_API}/secure/return?bookId=${bookId}`;
         const requestOptions = {
             method: "PUT",
             headers: {
@@ -68,7 +69,7 @@ export const ShelfPage = () => {
         }
 
         if (clickBuy) {
-            const url = `${process.env.REACT_APP_API}/secure/payment/returnFees`;
+            const url = `${REACT_APP_API}/secure/payment/returnFees`;
             const requestOptions = {
                 method: "POST",
                 headers: {

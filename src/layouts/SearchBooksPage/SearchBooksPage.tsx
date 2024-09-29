@@ -3,6 +3,7 @@ import BookModel from "../../models/BookModel.ts";
 import {SpinnerLoading} from "../Utils/SpinnerLoading.tsx";
 import {SearchBook} from "./components/SearchBook.tsx";
 import {Pagination} from "../Utils/Pagination.tsx";
+import {REACT_APP_API} from './../../constants/index.ts'
 
 export const SearchBooksPage = () => {
 
@@ -19,7 +20,7 @@ export const SearchBooksPage = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const baseUrl: string = `${process.env.REACT_APP_API}/api/books`;
+            const baseUrl: string = `${REACT_APP_API}/api/books`;
             let url: string = "";
 
             if (searchUrl === '') {
@@ -194,18 +195,14 @@ export const SearchBooksPage = () => {
                             {firstBookIndex + 1} to  {lastItem}  of {totalAmount} items:
                         </p>
                         {books.map(book => (
-                            <SearchBook book={book} key={book.id} />
+                            <SearchBook book={book} key={Number(book.id)} />
                         ))}
                     </>
                     :
                     <div className="m-5">
                         <h3>
-                            Can't find what you're looking for?
+                            Not found
                         </h3>
-                        <a href="#" type="button" className="
-                        btn main-color btn-md px-4 me-md-2 fw-bold text-white">
-                            Library services
-                        </a>
                     </div>
                 }
 

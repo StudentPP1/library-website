@@ -6,6 +6,7 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 export default defineConfig(({ mode }) => {
   return {
   plugins: [react(), basicSsl()],
+  port: 5173,
   define: {
     'process.env': loadEnv(mode, './', ''),
   },

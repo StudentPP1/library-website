@@ -5,9 +5,10 @@ import {SpinnerLoading} from "../../Utils/SpinnerLoading.tsx";
 import {Pagination} from "../../Utils/Pagination.tsx";
 import {AdminMessage} from "./AdminMessage.tsx";
 import AdminMessageRequest from "../../../models/AdminMessageRequest.ts";
+import {REACT_APP_API} from './../../../constants/index.ts'
 
 export const AdminMessages = () => {
-    const {isAuth, setAuth} = useContext(Auth)
+    const authContext = useContext(Auth)
     const [isLoadingMessages, setIsLoadingMessages] = useState<boolean>(true)
     const [httpError, setHttpError] = useState<boolean | null>(null)
 
@@ -21,8 +22,8 @@ export const AdminMessages = () => {
 
     useEffect(() => {
         const fetchMessage = async () => {
-            if (isAuth) {
-                const url = `${process.env.REACT_APP_API}/secure/messages/closed?closed=false&page=${currentPage - 1}&size=5`;
+            if (authContext?.isAuth) {
+                const url = `${REACT_APP_API}/secure/messages/closed?closed=false&page=${currentPage - 1}&size=5`;
                 const requestOptions = {
                     method: "GET",
                     headers: {
@@ -46,7 +47,7 @@ export const AdminMessages = () => {
             setHttpError(error.message)
         })
         window.scrollTo(0, 0);
-    }, [isAuth, currentPage, buttonSubmit]);
+    }, [authContext?.isAuth, currentPage, buttonSubmit]);
 
     if (isLoadingMessages) {
         return (
@@ -62,9 +63,9 @@ export const AdminMessages = () => {
         )
     }
 
-    async function submitResponse(id: number, response: string) {
-        const url = `${process.env.REACT_APP_API}/secure/admin/message`
-        if (isAuth && id !== null && response !== '') {
+    async function submitResponse(id: string, response: string) {
+        const url = `${REACT_APP_API}/secure/admin/message`
+        if (authContext?.isAuth && id !== null && response !== '') {
             const requestModel: AdminMessageRequest = new AdminMessageRequest(id, response);
             const requestOptions = {
                 method: "PUT",

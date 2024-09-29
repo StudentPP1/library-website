@@ -1,9 +1,9 @@
 import {Link, NavLink} from "react-router-dom";
 import {useContext} from "react";
-import {Auth, AuthContextType} from "../../context/context.ts";
+import {Auth} from "../../context/context.ts";
 
 export const Navbar = () => {
-    const {isAuth, setIsAuth, role, setRole} = useContext<AuthContextType>(Auth);
+    const authContext = useContext(Auth);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark main-color py-3">
@@ -36,21 +36,21 @@ export const Navbar = () => {
                                 Search books
                             </NavLink>
                         </li>
-                        {isAuth &&
+                        {authContext?.isAuth &&
                             <li className="nav-item">
                                 <NavLink to="/shelf" className="nav-link">
                                     Shelf
                                 </NavLink>
                             </li>
                         }
-                        {isAuth &&
+                        {authContext?.isAuth &&
                             <li className="nav-item">
                                 <NavLink to="/cart" className="nav-link">
                                     Cart
                                 </NavLink>
                             </li>
                         }
-                         {isAuth && role === "ADMIN"
+                         {authContext?.isAuth && authContext?.role === "ADMIN"
                             ?
                             <li className="nav-item">
                                 <NavLink to="/admin" className="nav-link">
@@ -65,15 +65,15 @@ export const Navbar = () => {
                         <li className="nav-item m-1">
                             <Link type="button"
                                   className="btn btn-outline-light"
-                                  to={isAuth ? "/" : "/login"}
+                                  to={authContext?.isAuth ? "/" : "/login"}
                                   onClick={() => {
-                                      if (isAuth) {
-                                          setIsAuth(false);
-                                          localStorage.clear();
+                                      if (authContext?.isAuth) {
+                                        authContext.setIsAuth(false);
+                                        localStorage.clear();
                                      }
                                   }}
                             >
-                                {isAuth ? "Logout" : "Login"}
+                                {authContext?.isAuth ? "Logout" : "Login"}
                             </Link>
                         </li>
                     </ul>

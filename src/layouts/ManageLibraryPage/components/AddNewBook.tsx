@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { Auth } from "../../../context/context";
 import AddBookRequest from "../../../models/AddBookRequest";
+import { REACT_APP_API } from "../../../constants";
 
 export const AddNewBook = () => {
-  const { isAuth, setIsAuth } = useContext(Auth);
+  const authContext = useContext(Auth);
 
   // new book
   const [title, setTitle] = useState("");
@@ -40,9 +41,9 @@ export const AddNewBook = () => {
   }
 
   async function submitBook() {
-    const url = `${process.env.REACT_APP_API}/secure/admin/add/book`;
+    const url = `${REACT_APP_API}/secure/admin/add/book`;
     if (
-      isAuth &&
+      authContext?.isAuth &&
       title !== "" &&
       author !== "" &&
       category !== "Category" &&

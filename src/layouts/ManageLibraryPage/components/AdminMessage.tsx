@@ -4,7 +4,7 @@ import React, {useState} from "react";
 export const AdminMessage: React.FC<{
     message: MessageModel,
     submitResponse: any,
-}> = (props, key) => {
+}> = (props) => {
     const [displayWarning, setDisplayWarning] = useState(false)
     const [response, setResponse] = useState<string>("");
 

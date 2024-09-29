@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {Auth} from "../../../context/context.ts";
 
 export const LibraryServices = () => {
-    const {isAuth} = useContext(Auth);
+    const authContext = useContext(Auth);
 
     return (
         <div className='container my-5'>
@@ -18,8 +18,8 @@ export const LibraryServices = () => {
                     </p>
                     <div className='d-grid gap-2 justify-content-md-start mb-4 mb-lg-3'>
                         <Link className='btn main-color btn-lg text-white'
-                              to= {isAuth ? "/messages" : "/login"}>
-                            {isAuth ? "Library Services" : "Sing in"}
+                              to= {authContext?.isAuth ? "/messages" : "/login"}>
+                            {authContext?.isAuth ? "Library Services" : "Sing in"}
                         </Link>
                     </div>
                 </div>

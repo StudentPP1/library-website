@@ -1,8 +1,8 @@
 class AdminMessageRequest {
-    id: number;
+    id: string;
     response: string;
 
-    constructor(id: number, response: string) {
+    constructor(id: string, response: string) {
         this.id = id;
         this.response = response;
     }

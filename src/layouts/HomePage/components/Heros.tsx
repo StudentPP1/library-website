@@ -3,7 +3,7 @@ import {Auth} from "../../../context/context.ts";
 import {Link} from "react-router-dom";
 
 export const Heros = () => {
-    const {isAuth, setIsAuth} = useContext(Auth);
+    const authContext = useContext(Auth);
 
     return (
         <div>
@@ -21,8 +21,8 @@ export const Heros = () => {
                                 we will be able to provide the top content for you!
                             </p>
                             <Link className='btn main-color btn-lg text-white'
-                                  to= {isAuth ? "/search" : "/login"}>
-                                {isAuth ? "Explore books" : "Sing in"}
+                                  to= {authContext?.isAuth ? "/search" : "/login"}>
+                                {authContext?.isAuth ? "Explore books" : "Sing in"}
                             </Link>
                         </div>
                     </div>
@@ -60,8 +60,8 @@ export const Heros = () => {
                                 we will be able to provide the top content for you!
                             </p>
                             <Link className='btn main-color btn-lg text-white'
-                                  to= {isAuth ? "/search" : "/login"}>
-                                {isAuth ? "Explore books" : "Sing in"}
+                                  to= {authContext?.isAuth ? "/search" : "/login"}>
+                                {authContext?.isAuth ? "Explore books" : "Sing in"}
                             </Link>
                         </div>
                     </div>

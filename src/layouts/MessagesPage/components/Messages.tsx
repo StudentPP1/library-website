@@ -3,9 +3,10 @@ import {Auth} from "../../../context/context.ts";
 import MessageModel from "../../../models/MessageModel.ts";
 import {SpinnerLoading} from "../../Utils/SpinnerLoading.tsx";
 import {Pagination} from "../../Utils/Pagination.tsx";
+import {REACT_APP_API} from './../../../constants/index.ts'
 
 export const Messages = () => {
-    const {isAuth, setIsAuth} = useContext(Auth);
+    const authContext = useContext(Auth);
     const [isLoadingMessages, setIsLoadingMessages] = useState<boolean>(true);
     const [httpError, setHttpError] = useState<boolean | null>(null);
 
@@ -18,8 +19,8 @@ export const Messages = () => {
 
     useEffect(() => {
         const fetchMessages = async () => {
-            if (isAuth) {
-                const url = `${process.env.REACT_APP_API}/secure/messages?page=${currentPage - 1}&size=5`;
+            if (authContext?.isAuth) {
+                const url = `${REACT_APP_API}/secure/messages?page=${currentPage - 1}&size=5`;
                 const requestOptions = {
                     method: "GET",
                     headers: {
@@ -43,7 +44,7 @@ export const Messages = () => {
             setHttpError(error.message);
         })
         window.scrollTo(0, 0);
-    }, [isAuth, currentPage]);
+    }, [authContext?.isAuth, currentPage]);
 
     if (isLoadingMessages) {
         return (

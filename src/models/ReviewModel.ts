@@ -1,5 +1,5 @@
 class ReviewModel {
-    id: number;
+    id: string;
     userEmail: string;
     date: string;
     rating: number;
@@ -8,7 +8,7 @@ class ReviewModel {
 
 
     constructor(
-        id: number,
+        id: string,
         userEmail: string,
         date: string,
         rating: number,

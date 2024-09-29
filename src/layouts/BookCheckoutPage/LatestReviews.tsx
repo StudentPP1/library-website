@@ -3,7 +3,7 @@ import ReviewModel from "../../models/ReviewModel";
 import {Review} from "../Utils/Review.tsx";
 
 export const LatestReviews: React.FC<{
-    reviews: ReviewModel[], bookId: number | undefined, mobile: boolean
+    reviews: ReviewModel[], bookId: string | undefined, mobile: boolean
 }> = (props) => {
 
     return (

@@ -12,10 +12,10 @@ export const CheckoutAndReviewBox: FC<{
     isReviewLeft: boolean,
     submitReview: any,
 }> = (props) => {
-    const {isAuth} = useContext(Auth);
+    const authContext = useContext(Auth);
 
     function buttonRender() {
-        if (isAuth) {
+        if (authContext?.isAuth) {
             if (!props.isCheckout) {
                 return (
                     <button
@@ -40,14 +40,14 @@ export const CheckoutAndReviewBox: FC<{
     }
     
     function reviewRender() {
-        if (isAuth && !props.isReviewLeft) {
+        if (authContext?.isAuth && !props.isReviewLeft) {
             return(
                 <p>
                     <LeaveReview
                     submitReview={props.submitReview}/>
                 </p>
             )
-        } else if (isAuth && props.isReviewLeft) {
+        } else if (authContext?.isAuth && props.isReviewLeft) {
             return (
                 <p>
                     <b>

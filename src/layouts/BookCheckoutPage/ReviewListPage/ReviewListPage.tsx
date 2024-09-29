@@ -3,6 +3,7 @@ import ReviewModel from "../../../models/ReviewModel.ts";
 import {SpinnerLoading} from "../../Utils/SpinnerLoading.tsx";
 import {Review} from "../../Utils/Review.tsx";
 import {Pagination} from "../../Utils/Pagination.tsx";
+import {REACT_APP_API} from './../../../constants/index.ts'
 
 export const ReviewListPage = () => {
     const [reviews, setReviews] = useState<ReviewModel[]>([]);
@@ -19,7 +20,7 @@ export const ReviewListPage = () => {
 
     useEffect(() => {
         const fetchBookReviews = async () => {
-            const reviewUrl: string = `${process.env.REACT_APP_API}/api/reviews/search/findByBookId?bookId=${bookId}&page=${currentPage - 1}&size=${reviewsPerPage}`;
+            const reviewUrl: string = `${REACT_APP_API}/api/reviews/search/findByBookId?bookId=${bookId}&page=${currentPage - 1}&size=${reviewsPerPage}`;
             const response = await fetch(reviewUrl);
             if (!response.ok) {
                 throw new Error(response.statusText);

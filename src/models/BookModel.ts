@@ -1,6 +1,6 @@
 // backend Book table
 class BookModel {
-    id: number;
+    id: string;
     title: string;
     // ? = optional
     author?: string;
@@ -12,7 +12,7 @@ class BookModel {
     buy?: boolean;
 
     constructor(
-        id: number,
+        id: string,
         title: string,
         author: string,
         description: string,

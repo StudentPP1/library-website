@@ -1,17 +1,18 @@
 import {useContext, useState} from "react";
 import {Auth} from "../../../context/context.ts";
 import MessageModel from "../../../models/MessageModel.ts";
+import {REACT_APP_API} from './../../../constants/index.ts'
 
 export const PostMessage = () => {
-    const {isAuth, setIsAuth} = useContext(Auth);
+    const authContext = useContext(Auth);
     const [title, setTitle] = useState<string>('');
     const [question, setQuestion] = useState<string>('');
     const [displayWarning, setDisplayWarning] = useState<boolean>(false);
     const [displaySuccess, setDisplaySuccess] = useState<boolean>(false);
 
     async function submitQuestion() {
-        const url = `${process.env.REACT_APP_API}/secure/add/message`
-        if (isAuth && title !== '' && question !== '') {
+        const url = `${REACT_APP_API}/secure/add/message`
+        if (authContext?.isAuth && title !== '' && question !== '') {
             const messageRequestModel: MessageModel = new MessageModel(title, question);
             const requestOptions = {
                 method: "POST",

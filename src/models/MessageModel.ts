@@ -1,7 +1,7 @@
 class MessageModel {
     title: string;
     question: string;
-    id?: number;
+    id?: string;
     userEmail?: string;
     adminEmail?: string;
     response?: string;

@@ -1,35 +1,38 @@
-import {Auth, AuthContextType} from "../context/context.ts";
+import {Auth} from "../context/context.ts";
 import {useContext} from "react";
 import {Link} from "react-router-dom";
+import {REACT_APP_API} from '../constants/index.ts'
 
 export const LoginWidget = () => {
-    const {isAuth, setIsAuth, role, setRole} = useContext(Auth);
+    const authContext = useContext(Auth);
 
-    const singin = async () => {
+    const sing_in = async () => {
         const form = document.querySelector('form');
-        const username = form.elements[0].value;
-        const email = form.elements[1].value;
-        const password = form.elements[2].value;
-
-        const url: string = `${process.env.REACT_APP_API}/api/login`
-
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                'Content-Type': "application/json",
-                'Access-Control-Allow-Origin' : '*'
-            },
-            body: JSON.stringify({
-                username: username,
-                password: password,
-                email: email
-            })
-        });
-
-        const json = await response.json();
-        console.log(json)
-        localStorage.setItem("role", json["role"]);
-        localStorage.setItem("token", json["token"]);
+        if (form != null) {
+            const username = (form.elements[0] as HTMLInputElement).value;
+            const email = (form.elements[1] as HTMLInputElement).value;
+            const password = (form.elements[2] as HTMLInputElement).value;
+    
+            const url: string = `${REACT_APP_API}/api/login`
+    
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json",
+                    'Access-Control-Allow-Origin' : '*'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password,
+                    email: email
+                })
+            });
+    
+            const json = await response.json();
+            console.log(json)
+            localStorage.setItem("role", json["role"]);
+            localStorage.setItem("token", json["token"]);
+        }
     }
 
     return (
@@ -67,8 +70,8 @@ export const LoginWidget = () => {
                 </div>
 
                 <Link className="btn btn-primary" type="submit" onClick={() => {
-                    singin().then(() => {
-                        setIsAuth(true);
+                    sing_in().then(() => {
+                        authContext?.setIsAuth(true);
                     })
                 }}
                       to="/home">

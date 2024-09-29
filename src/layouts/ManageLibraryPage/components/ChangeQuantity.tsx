@@ -3,6 +3,7 @@ import BookModel from "../../../models/BookModel";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
 import { Pagination } from "../../Utils/Pagination";
 import { BookStats } from "./BookStats";
+import { REACT_APP_API } from "../../../constants";
 
 export const ChangeQuantity = () => {
   const [books, setBooks] = useState<BookModel[]>([]);
@@ -16,7 +17,7 @@ export const ChangeQuantity = () => {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const url: string = `${process.env.REACT_APP_API}/api/books?page=${
+      const url: string = `${REACT_APP_API}/api/books?page=${
         currentPage - 1
       }&size=${5}`;
       const response = await fetch(url);
@@ -64,7 +65,6 @@ export const ChangeQuantity = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  // !! send to child component without sending useState
   const deleteBook = () => {
     setBookDelete(!bookDelete)
   }
@@ -94,7 +94,7 @@ export const ChangeQuantity = () => {
           {books.map((book) => (
             <BookStats 
             book={book} 
-            key={book.id}
+            key={Number(book.id)}
             deleteBook={deleteBook}
             />
           ))}

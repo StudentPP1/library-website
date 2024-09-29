@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import BookModel from "../../../models/BookModel";
+import {REACT_APP_API} from './../../../constants/index.ts'
 
 export const BookStats: React.FC<{
     book: BookModel,
     deleteBook: any,
-}> = (props, key) => {
+}> = (props) => {
     const [quantity, setQuantity] = useState<number>(0);
     const [remain, setRemain] = useState<number>(0);
     const [addQuantity, setAddQuantity] = useState<number>(1);
@@ -24,7 +25,7 @@ export const BookStats: React.FC<{
     }, [])
 
     async function increase() {
-        const url = `${process.env.REACT_APP_API}/secure/admin/increase/book/quantity?bookId=${props.book.id}&quantity=${addQuantity}`
+        const url = `${REACT_APP_API}/secure/admin/increase/book/quantity?bookId=${props.book.id}&quantity=${addQuantity}`
         const requestOptions = {
             method: "POST",
             headers: {
@@ -43,7 +44,7 @@ export const BookStats: React.FC<{
 
     async function decrease() {
         if (deleteQuantity <= quantity) {
-            const url = `${process.env.REACT_APP_API}/secure/admin/decrease/book/quantity?bookId=${props.book.id}&quantity=${deleteQuantity}`
+            const url = `${REACT_APP_API}/secure/admin/decrease/book/quantity?bookId=${props.book.id}&quantity=${deleteQuantity}`
             const requestOptions = {
                 method: "POST",
                 headers: {
@@ -62,7 +63,7 @@ export const BookStats: React.FC<{
     }
 
     async function deleteBook() {
-        const url = `${process.env.REACT_APP_API}/secure/admin/delete/book?bookId=${props.book.id}`
+        const url = `${REACT_APP_API}/secure/admin/delete/book?bookId=${props.book.id}`
         const requestOptions = {
             method: "DELETE",
             headers: {
