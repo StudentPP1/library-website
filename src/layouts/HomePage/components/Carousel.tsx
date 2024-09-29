@@ -9,16 +9,18 @@ export const Carousel = () => {
     const [books, setBooks] = useState<BookModel[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
-    
+
     useEffect(() => {
         const fetchBooks = async () => {
             const baseUrl: string = `${REACT_APP_API}/api/books`
             const url: string = `${baseUrl}?page=0&size=9`;
             const response = await fetch(url, {
                 headers: {
-                    mode: "no-cors",
-                    "Access-Control-Allow-Origin": "*",
-                    "Content-Type": "application/json",
+                    method: "GET",
+                    credentials: 'include',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Credentials': 'true'
                 }
             });
 
