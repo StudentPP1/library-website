@@ -18,7 +18,8 @@ export const ShelfPage = () => {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': "application/json",
+                    'Access-Control-Allow-Origin' : '*',
                 }
             }
             const response = await fetch(url, requestOptions);
@@ -59,7 +60,8 @@ export const ShelfPage = () => {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-                'Content-Type': 'application/json',
+                'Content-Type': "application/json",
+                'Access-Control-Allow-Origin' : '*',
             }
         }
         const response = await fetch(url, requestOptions);
@@ -74,7 +76,8 @@ export const ShelfPage = () => {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': "application/json",
+                    'Access-Control-Allow-Origin' : '*',
                 }
             }
             await fetch(url, requestOptions);

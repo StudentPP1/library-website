@@ -25,7 +25,8 @@ export const Messages = () => {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        'Content-Type': 'application/json',
+                        'Content-Type': "application/json",
+                        'Access-Control-Allow-Origin' : '*',
                     }
                 }
                 const response = await fetch(url, requestOptions);

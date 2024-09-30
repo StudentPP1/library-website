@@ -15,6 +15,7 @@ export const Carousel = () => {
             const baseUrl: string = `${REACT_APP_API}/api/books`
             const url: string = `${baseUrl}?page=0&size=9`;
             const response = await fetch(url, {
+                method: "GET",
                 headers: {
                     'Content-Type': "application/json",
                     'Access-Control-Allow-Origin' : '*',

@@ -31,7 +31,12 @@ export const SearchBooksPage = () => {
                 url = baseUrl + searchPage;
             }
 
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                headers: {
+                    'Content-Type': "application/json",
+                    'Access-Control-Allow-Origin' : '*',
+                }
+            });
 
             if (!response.ok) {
                 throw new Error(response.statusText);

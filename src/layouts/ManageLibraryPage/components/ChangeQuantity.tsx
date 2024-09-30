@@ -20,7 +20,12 @@ export const ChangeQuantity = () => {
       const url: string = `${REACT_APP_API}/api/books?page=${
         currentPage - 1
       }&size=${5}`;
-      const response = await fetch(url);
+      const response = await fetch(url, {
+        headers: {
+          'Content-Type': "application/json",
+          'Access-Control-Allow-Origin' : '*',
+        }
+      });
 
       if (!response.ok) {
         throw new Error(response.statusText);

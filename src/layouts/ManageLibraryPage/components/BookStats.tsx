@@ -30,7 +30,8 @@ export const BookStats: React.FC<{
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": 'application/json'
+                'Content-Type': "application/json",
+                'Access-Control-Allow-Origin' : '*',
             }
         }
         const response = await fetch(url, requestOptions);
@@ -49,7 +50,8 @@ export const BookStats: React.FC<{
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    "Content-Type": 'application/json'
+                    'Content-Type': "application/json",
+                    'Access-Control-Allow-Origin' : '*',
                 }
             }
             const response = await fetch(url, requestOptions);
@@ -68,7 +70,8 @@ export const BookStats: React.FC<{
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": 'application/json'
+                'Content-Type': "application/json",
+                'Access-Control-Allow-Origin' : '*',
             }
         }
         const response = await fetch(url, requestOptions);

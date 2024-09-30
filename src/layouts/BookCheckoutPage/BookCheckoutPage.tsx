@@ -33,7 +33,12 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchBook = async () => {
             const url: string = `${REACT_APP_API}/api/books/${bookId}`;
-            const response = await fetch(url);
+            const response = await fetch(url, {
+                headers: {
+                    'Content-Type': "application/json",
+                    'Access-Control-Allow-Origin' : '*',
+                },
+            });
 
             if (!response.ok) {
                 throw new Error(response.statusText);
@@ -63,7 +68,12 @@ export const BookCheckoutPage = () => {
     useEffect(() => {
         const fetchBookReviews = async () => {
             const reviewUrl: string = `${REACT_APP_API}/api/reviews/search/findByBookId?bookId=${bookId}`;
-            const response = await fetch(reviewUrl);
+            const response = await fetch(reviewUrl, {
+                headers: {
+                    'Content-Type': "application/json",
+                    'Access-Control-Allow-Origin' : '*',
+                },
+            });
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
@@ -108,8 +118,9 @@ export const BookCheckoutPage = () => {
                 const requestOption = {
                     method: "GET",
                     headers: {
+                        'Content-Type': "application/json",
+                        'Access-Control-Allow-Origin' : '*',
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        'Content-Type': 'application/json',
                     }
                 };
                 const response = await fetch(url, requestOption);
@@ -138,7 +149,8 @@ export const BookCheckoutPage = () => {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
-                        'Content-Type': 'application/json',
+                        'Content-Type': "application/json",
+                        'Access-Control-Allow-Origin' : '*',
                     }
                 };
                 const response = await fetch(url, requestOption);
@@ -182,7 +194,8 @@ export const BookCheckoutPage = () => {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-                'Content-Type': 'application/json',
+                'Content-Type': "application/json",
+                'Access-Control-Allow-Origin' : '*',
             }
         };
         const response = await fetch(url, requestOption);
@@ -207,7 +220,8 @@ export const BookCheckoutPage = () => {
             method: "POST",
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
-                "Content-Type": "application/json"
+                'Content-Type': "application/json",
+                'Access-Control-Allow-Origin' : '*',
             },
             body: JSON.stringify(reviewRequestModel)
         }

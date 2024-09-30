@@ -62,7 +62,8 @@ export const AddNewBook = () => {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
+          'Content-Type': "application/json",
+          'Access-Control-Allow-Origin' : '*',
         },
         body: JSON.stringify(book),
       };

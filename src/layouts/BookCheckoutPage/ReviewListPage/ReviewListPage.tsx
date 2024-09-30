@@ -21,7 +21,12 @@ export const ReviewListPage = () => {
     useEffect(() => {
         const fetchBookReviews = async () => {
             const reviewUrl: string = `${REACT_APP_API}/api/reviews/search/findByBookId?bookId=${bookId}&page=${currentPage - 1}&size=${reviewsPerPage}`;
-            const response = await fetch(reviewUrl);
+            const response = await fetch(reviewUrl, {
+                headers: {
+                    'Content-Type': "application/json",
+                    'Access-Control-Allow-Origin' : '*',
+                },
+            });
             if (!response.ok) {
                 throw new Error(response.statusText);
             }
