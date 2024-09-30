@@ -67,7 +67,7 @@ export const Carousel = () => {
     }
 
     return (
-        <div className='container mt-5' style={{ height: 550 }}>
+        <div className='container' style={{ height: 550 }}>
             <div className='homepage-carousel-title text-center'>
                 <h3>Find your next "I stayed up too late reading" book.</h3>
             </div>
@@ -122,6 +122,7 @@ export const Carousel = () => {
             <div className='homepage-carousel-title mt-3'>
                 <Link className='btn btn-outline-secondary btn-lg' to="/search">View More</Link>
             </div>
+            <hr />
         </div>
     );
 }
